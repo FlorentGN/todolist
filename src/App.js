@@ -1,29 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
 import TodoList from "./TodoList";
+import TodoForm from "./TodoForm";
 
 function App() {
-    const [todos] = useState([
-        { id: 1, done: false, text: 'Add new todo with form' },
-        { id: 2, done: false, text: 'Create Components : TodoForm, TodoList, TodoItem ...' },
-        { id: 3, done: false, text: 'Mark done an item' },
-        { id: 4, done: false, text: 'Remove an item' }
+
+    const [todoId, setTodoId] = useState(6);
+
+    const [todos, setTodos] = useState( [
+        { id: 1, done: true, text: 'Add new todo with form' },
+        { id: 2, done: true, text: 'Create Components : TodoForm, TodoList, TodoItem ...' },
+        { id: 3, done: true, text: 'Mark done an item' },
+        { id: 4, done: true, text: 'Remove an item' },
+        { id: 5, done: true, text: 'Keep todos when refresh page'}
     ]);
+
+    useEffect(() => {
+        if (localStorage.getItem('todos') && localStorage.getItem('todoId')) {
+            setTodos(JSON.parse(localStorage.getItem('todos')));
+            setTodoId(JSON.parse(localStorage.getItem('todoId')));
+        }
+    },[]);
+
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+        localStorage.setItem('todoId', JSON.stringify(todoId));
+    }, [todos]);
+
+    const handleTodoFormSubmit = text => {
+        console.log("handleTodoFormSubmit");
+
+        const updatedTodos = [...todos];
+        updatedTodos.push({
+            id: todoId,
+            done: false,
+            text: text
+        });
+
+        setTodos(updatedTodos);
+        setTodoId(todoId + 1);
+
+    };
+
+    const handleTodoDone = id => {
+        const updatedTodos = [...todos];
+        const currentTodo = updatedTodos.find(todos => todos.id === id);
+
+        if(currentTodo.done) {
+            currentTodo.done = false;
+        }
+        else {
+            currentTodo.done = true;
+        }
+
+        setTodos(updatedTodos);
+    }
+
+    const deleteTodoItem = id => {
+        const updatedTodos = [...todos];
+        const index = updatedTodos.findIndex(todos => todos.id === id);
+
+        updatedTodos.splice(index, 1);
+
+        setTodos(updatedTodos);
+    };
 
     return (
         <div className="App">
             <div className="wrapper">
-                <form>
-                    <input
-                        type="text"
-                        placeholder="Add a new todo"
-                    />
-                    <button type="submit">Add</button>
-                </form>
-
-                <TodoList todos={todos}/>
-
+                <TodoForm onSubmit={handleTodoFormSubmit} />
+                <TodoList todos={todos} deleteTodoItem={deleteTodoItem} todoDone={handleTodoDone} />
             </div>
         </div>
     );
