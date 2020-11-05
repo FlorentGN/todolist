@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import './App.css';
+import TodoItem from "./TodoItem";
 
 function App() {
     const [todos] = useState([
@@ -24,11 +25,7 @@ function App() {
                 <ul>
                     {
                         todos.map((item, index) => (
-                            <li key={item.id}>
-                                <span className={item.done ? 'done' : 'undone'}>&#9675;</span>
-                                {item.text}
-                                <span className="remove">X</span>
-                            </li>
+                            <TodoItem id={item.id} done={item.done} text={item.text}/>
                         ))
                     }
                 </ul>
