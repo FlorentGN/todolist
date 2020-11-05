@@ -9,18 +9,21 @@ function App() {
 
     const [todoId, setTodoId] = useState(6);
 
-    const [todos, setTodos] = useState( [
-        { id: 1, done: true, text: 'Add new todo with form' },
-        { id: 2, done: true, text: 'Create Components : TodoForm, TodoList, TodoItem ...' },
-        { id: 3, done: true, text: 'Mark done an item' },
-        { id: 4, done: true, text: 'Remove an item' },
-        { id: 5, done: true, text: 'Keep todos when refresh page'}
-    ]);
+    const [todos, setTodos] = useState([]);
 
     useEffect(() => {
         if (localStorage.getItem('todos') && localStorage.getItem('todoId')) {
             setTodos(JSON.parse(localStorage.getItem('todos')));
             setTodoId(JSON.parse(localStorage.getItem('todoId')));
+        } else {
+            const defaultTodos = [
+                { id: 1, done: true, text: 'Add new todo with form' },
+                { id: 2, done: true, text: 'Create Components : TodoForm, TodoList, TodoItem ...' },
+                { id: 3, done: true, text: 'Mark done an item' },
+                { id: 4, done: true, text: 'Remove an item' },
+                { id: 5, done: true, text: 'Keep todos when refresh page'}
+            ];
+            setTodos(defaultTodos);
         }
     },[]);
 
@@ -69,7 +72,10 @@ function App() {
 
     return (
         <div className="App">
-            <h1>My Todo List</h1>
+            <div id="title-div">
+                <h1>My Todo List</h1>
+            </div>
+            
             <div className="wrapper">
                 <TodoForm onSubmit={handleTodoFormSubmit} />
                 <TodoList todos={todos} deleteTodoItem={deleteTodoItem} todoDone={handleTodoDone} />
