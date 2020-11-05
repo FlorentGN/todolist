@@ -1,0 +1,7 @@
+[
+    { "id": 1, "done": true, "text": "Add new todo with form" },
+    { "id": 2, "done": true, "text": "Create Components : TodoForm, TodoList, TodoItem ..." },
+    { "id": 3, "done": true, "text": "Mark done an item" },
+    { "id": 4, "done": true, "text": "Remove an item" },
+    { "id": 5, "done": true, "text": "Keep todos when refresh page"}
+]
