@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
@@ -68,6 +69,7 @@ function App() {
 
     return (
         <div className="App">
+            <h1>My Todo List</h1>
             <div className="wrapper">
                 <TodoForm onSubmit={handleTodoFormSubmit} />
                 <TodoList todos={todos} deleteTodoItem={deleteTodoItem} todoDone={handleTodoDone} />

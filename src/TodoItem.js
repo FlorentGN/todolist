@@ -14,7 +14,7 @@ function TodoItem({id, done, text, deleteTodoItem, todoDone}) {
         <li key={id}>
             <span className={done ? 'done' : 'undone'} onClick={handleDoneOnClick}>&#9675;</span>
             {text}
-            <span className="remove" onClick={handleRemoveOnClick}>X</span>
+            <span className="remove" onClick={handleRemoveOnClick} className="todo-item-delete btn btn-danger">X</span>
         </li>
     );
 

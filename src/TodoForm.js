@@ -23,7 +23,7 @@ function TodoForm({onSubmit}) {
                 onChange={handleInputChange}
                 value={todoText}
             />
-            <button type="submit" onClick={handleOnSubmit}>Add</button>
+            <button type="submit" onClick={handleOnSubmit} className="todo-form-add-btn btn btn-success">Add</button>
         </form>
     );
 
