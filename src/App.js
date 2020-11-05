@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import './App.css';
-import TodoItem from "./TodoItem";
+import TodoList from "./TodoList";
 
 function App() {
     const [todos] = useState([
@@ -22,13 +22,8 @@ function App() {
                     <button type="submit">Add</button>
                 </form>
 
-                <ul>
-                    {
-                        todos.map((item, index) => (
-                            <TodoItem id={item.id} done={item.done} text={item.text}/>
-                        ))
-                    }
-                </ul>
+                <TodoList todos={todos}/>
+
             </div>
         </div>
     );
